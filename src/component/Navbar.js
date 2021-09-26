@@ -3,13 +3,24 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
+
+  let myStyletext = {
+      color: props.mode == 'dark'?'white':'black',
+      opacity: props.mode == 'dark'?'0.5': '1',
+  }
+
+//   let myStylecolor = {
+//     color: props.setthemeMode == 'danger'?'white':'black',
+//     //opacity: props.mode == 'dark'?'0.5': '1',
+// }
+
   return (
     <div>
       <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             {props.title}
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -29,13 +40,13 @@ export default function Navbar(props) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="#"> 
+                <Link className="nav-link" to="/about"> 
                   {props.aboutText}
                   About
                 </Link>
               </li>
             </ul>
-            <form className="d-flex">
+            {/* <form className="d-flex">
               <input
                 className="form-control me-2"
                 type="search"
@@ -45,18 +56,18 @@ export default function Navbar(props) {
               <button className="btn btn-outline-primary" type="submit">
                 Search
               </button>
-            </form>
-            <div className={`form-check form-switch common-hide text-text-${props.thememode==='light'?'danger':'light'}`} style={{ display: props.mode ? "dark" : "none" }}>
-              <input className="form-check-input" type="checkbox"  onClick={props.toggleThemeDanger} id="flexSwitchCheckDefault" />
-              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable Red theme</label>
+            </form> */}
+            <div className={`form-check form-switch common-hide text-text-${props.thememode==='light'?'danger':'light'}`} >
+              <input className="form-check-input" type="checkbox"  onClick={props.toggleThemeDanger} id="flexSwitchCheckDefault" disabled={props.mode === "dark"} />
+              <label className="form-check-label" htmlFor="flexSwitchCheckDefault" style={myStyletext}>Enable Red theme</label>
             </div>
-            <div className={`form-check form-switch  mx-3 common-hide  text-text-text-${props.thememode==='light'?'success':'light'}`}>
-              <input className="form-check-input" type="checkbox"  onClick={props.toggleThemeGreen} id="flexSwitchCheckDefault" />
-              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable Green theme</label>
+            <div className={`form-check form-switch  mx-3 common-hide  text-text-text-${props.thememode==='light'?'success':'light'}`} >
+              <input className="form-check-input" type="checkbox"  onClick={props.toggleThemeGreen} id="flexSwitchCheckDefault" disabled={props.mode === "dark"}/>
+              <label className="form-check-label" htmlFor="flexSwitchCheckDefault" style={myStyletext} >Enable Green theme</label>
             </div>
-            <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'}`}>
-              <input className="form-check-input" type="checkbox"  onClick={props.toggleModeBtn} id="flexSwitchCheckDefault" />
-              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable Dark Mode</label>
+            <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'}`} >
+              <input className="form-check-input" type="checkbox"  onClick={props.toggleModeBtn} id="flexSwitchCheckDefault" disabled={props.setthemeMode === "danger" ||  props.setthemeMode==="success"}/>
+              <label className="form-check-label" htmlFor="flexSwitchCheckDefault" style={myStyletext}>Enable Dark Mode</label>
             </div>
           </div>
         </div>

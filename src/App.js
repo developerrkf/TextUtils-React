@@ -34,6 +34,9 @@ function App() {
             console.log("dark mode is activated");
         }
     }
+
+    //const disabled = thememode === 'danger'?''
+
     const showAlert = (message, type)=> {
         setAlert({
             msg: message,
@@ -50,13 +53,13 @@ function App() {
             document.body.style.backgroundColor = "gray";
             showAlert("Dark mode has been enabled","success");
            // document.getElementByClass("element").style.display = "none";
-           document.title = "Textutils - Dark mode";
+           //document.title = "Textutils - Dark mode";
         }
         else{
             setMode('light')
             document.body.style.backgroundColor = "white";
             showAlert("Light mode has been enabled","success");
-            document.title = "Textutils - Light mode";
+            //document.title = "Textutils - Light mode";
         }
     }
 
@@ -89,11 +92,11 @@ function App() {
             {/* <Navbar title="TextUtils" aboutText="AboutText Utils"/> */}
             {/* <Navbar /> */}
             <Navbar title="TextUtils" mode={mode} toggleModeBtn={toggleModeBtn} toggleThemeDanger={toggleThemeDanger} toggleThemeGreen={toggleThemeGreen}/>
-            <Alert alert={alert}/>
+            <Alert alert={alert} />
             <div className="container my-3" >
                 <Switch>
                     <Route exact path="/about">
-                        <About />
+                        <About  mode={mode}  />
                     </Route>
                     <Route exact path="/">
                         <TextForm heading="Enter the text to analyze"  thememode={thememode} showAlert={showAlert} />

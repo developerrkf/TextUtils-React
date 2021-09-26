@@ -1,38 +1,42 @@
 import React, { useState } from 'react'
 
-export default function About() {
+export default function About(props) {
 
 
-    const [myStyle, setMyStyle] = useState({
-        backgroundColor: 'white',
-        color: 'black',
-        border: '1px solid #fff'
-    })  
+    // const [myStyle, setMyStyle] = useState({
+    //     backgroundColor: 'white',
+    //     color: 'black',
+    //     border: '1px solid #fff'
+    // })  
 
-    const [BtnTextChanges, setBtnTextChanges] = useState("Enable Dark Mode");
+    // const [BtnTextChanges, setBtnTextChanges] = useState("Enable Dark Mode");
 
-    const textDarkBtn = ()=> {
-        if(myStyle.color === 'black') {
-           setMyStyle({
-            backgroundColor: 'black',
-            color: '#fff'
-           })
-           setBtnTextChanges("Enable Light Mode");
-        }
-        else {
-            setMyStyle({
-                backgroundColor: 'white',
-                color: 'black '
-            })
-            setBtnTextChanges("Enable Dark Mode");
-        }
-    }
+    // const textDarkBtn = ()=> {
+    //     if(myStyle.color === 'black') {
+    //        setMyStyle({
+    //         backgroundColor: 'black',
+    //         color: '#fff'
+    //        })
+    //        setBtnTextChanges("Enable Light Mode");
+    //     }
+    //     else {
+    //         setMyStyle({
+    //             backgroundColor: 'white',
+    //             color: 'black '
+    //         })
+    //         setBtnTextChanges("Enable Dark Mode");
+    //     }
+    // }
     
+    let myStyle = {
+        color: props.mode == 'dark'?'white':'black',
+        backgroundColor:  props.mode == 'dark'?'black':'white'
+    }
     return (
         <div>
             <div className="container my-3 py-3" style={myStyle}>
                 <h1 className="my-3">AboutUs</h1>
-                <div className="accordion" id="accordionExample">
+                <div className="accordion" id="accordionExample" style={myStyle}>
                     <div className="accordion-item">
                         <h2 className="accordion-header" id="headingOne">
                         <button className="accordion-button" type="button" style={myStyle} data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -71,9 +75,9 @@ export default function About() {
                     </div>
                 </div>
             </div>
-            <div className="container mb-3">
+            {/* <div className="container mb-3">
                 <button type="button" className="btn btn-primary" onClick={textDarkBtn}>{BtnTextChanges}</button>
-            </div>
+            </div> */}
         </div>
     )
 }
