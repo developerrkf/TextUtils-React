@@ -5,23 +5,45 @@ export default function TextForm(props) {
         //console.log("Uppercase was clicked");
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Text is converted in the Uppercase","success");
+    }
+    const handleUpClicklow = ()=> {
+        let newLowText = text.toLowerCase();
+        setText(newLowText);
+        props.showAlert("Text is converted in the Lowercase","success");
     }
     const handleOnChange = (event)=> {
         //console.log("Uppercase on change");
         setText(event.target.value);
     }
-    
-    const [text, setText] = useState('Enter text here');
+    const handleUpCleartext = ()=> {
+        let cleartext = " ";
+        setText(cleartext);
+        props.showAlert("Text is clear","success");
+    }
+    const [text, setText] = useState('');
    // setText("New text valus");
 
     return (
-        <div>
-            <h1>{props.heading}</h1> 
-            <div className="mb-3">
-                <label htmlFor="myBox" className="form-label">Example textarea</label>
-                <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+        <>
+            <div className="container"style={{color: props.mode==='dark'?'white':'black'}} >
+                <h1 >{props.heading}</h1> 
+                <div className="mb-3">
+                    <label htmlFor="myBox" className="form-label">Example textarea</label>
+                    <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8" style={{backgroundColor: props.mode==='dark'?'grey':'white',
+                    color: props.mode==='dark'?'white':'black'}}></textarea>
+                </div>
+                <button className="btn btn-primary" onClick={handleUpClick}>Convert to Uppercasae</button>
+                <button className="btn btn-primary mx-3" onClick={handleUpClicklow}>Convert to Lowercase</button>
+                <button className="btn btn-primary" onClick={handleUpCleartext}>Clear Text</button>
             </div>
-            <button className="btn btn-primary" onClick={handleUpClick}>Convert to Uppercasae</button>
-        </div>
+            <div className="container my-3" style={{color: props.mode==='dark'?'white':'black'}}>
+                <h1>Your text summary</h1>
+                <p>{text.split(" ").length} words and {text.length} characters</p>
+                <p>{0.008 * text.split(" ").length } Minutes read</p>
+                <h2>Preview</h2>
+                <p>{text.length>0?text:"Enter something in the textbox above to preview here"}</p>
+            </div>
+        </>
     )
 }
